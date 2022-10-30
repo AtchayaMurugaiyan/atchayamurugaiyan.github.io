@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FI GYM</title>
+  <!-- LineChart js -->
+  <script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js"></script>
+  <script src="https://cdn.anychart.com/releases/v8/js/anychart-ui.min.js"></script>
+  <script src="https://cdn.anychart.com/releases/v8/js/anychart-exports.min.js"></script>
+  <link href="https://cdn.anychart.com/releases/v8/css/anychart-ui.min.css" type="text/css" rel="stylesheet">
+  <link href="https://cdn.anychart.com/releases/v8/fonts/css/anychart-font.min.css" type="text/css" rel="stylesheet">
+  <!-- GaugeChart js -->
+  <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+  <!-- Font-awesome -->
+  <link rel="stylesheet" href="assets\fontawesome\font-awesome-4.7.0\css\font-awesome.min.css" />
+  <!-- Bootstrap Css -->
+  <link rel="stylesheet" href="assets/css/bootstrap.css" />
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+  <!-- Custom css -->
+  <link href="assets/css/style.css" rel="stylesheet" />
+  <script>
+
+    anychart.onDocumentReady(function () {
+      var dataSet = anychart.data.set(getData());
+      var firstSeriesData = dataSet.mapAs({ x: 0, value: 1 });
+      var chart = anychart.area();
+      chart.animation(true);
+      var crosshair = chart.crosshair();
+      crosshair.enabled(true).yLabel(false).yStroke(null).xStroke('#fff');
+      chart.interactivity().hoverMode('by-x');
+      chart.tooltip().displayMode('union');
+      chart.xAxis(1).orientation('top');
+      var setupSeries = function (series, name) {
+        series.name(name);
+        series.markers().zIndex(100);
+        series
+          .hovered()
+          .markers()
+          .enabled(true)
+          .type('circle')
+          .size(4)
+          .stroke('1.5 #fff');
+      };
+      var series;
+      series = chart.area(firstSeriesData);
+      setupSeries(series, 'hours ');
+      chart.yGrid().stroke('#ddd');
+      chart.xGrid().stroke('#ddd');
+      chart.container('container');
+      chart.draw();
+    });
+
+    function getData() {
+      return [
+        ['20°C', 1],
+        ['27°C', 2],
+        ['50°C', 3],
+        ['75°C', 4],
+        ['100°C', 5],
+        ['125°C', 9],
+        ['150°C', 10],
+        ['175°C', 12],
+        ['200°C', 11],
+        ['225°C', 7],
+        ['250°C', 1],
+        ['275°C', 2],
+        ['300°C', 3],
+        ['325°C', 4],
+        ['350°C', 5],
+        ['375°C', 9],
+        ['400°C', 10],
+        ['425°C', 12],
+        ['450°C', 11],
+        ['455°C', 7]
+      ];
+    }
+
+  </script>
+
+
+</head>
+
+<body>
+  <div class="row mainsection" style="background-image:url(assets/images/welcome-bg.webp);">
+    <div class="col-md-5 subsection">
+      <div class="m-2 pull-left w-100">
+        <div class="slide">
+          <img src="assets/images/icons/add_icon.png" alt="add_icon" class="icon-color">
+        </div>
+        <div class="dots pull-left" style="text-align:center">
+          <span class="dot" onclick="currentSlide(1)"></span>
+          <span class="dot" onclick="currentSlide(2)"></span>
+          <span class="dot" onclick="currentSlide(3)"></span>
+        </div>
+        <div class="switch">
+          <span>&#x2103;</span>
+          <img src="assets/images/icons/toggle_icon.png" alt="toggle_icon" class="icon-color">
+          <span>&deg;F</span>
+        </div>
+      </div>
+      <br>
+      <div class="m-2 pull-left w-100">
+        <div class="location">
+          <img src="assets/images/icons/location_icon.png" style="transform: rotate(45deg);" alt="location"
+            class="icon-color">
+          <span>New YORK, USA</span>
+          <div>Today 28 Sept</div>
+        </div>
+        <div class="location date">
+          <div>
+            <img src="assets/images/icons/sunrise_icon.png" alt="sunrise_icon" class="icon-color">
+            <span>07:19</span>
+          </div>
+          <div>
+            <img src="assets/images/icons/sunrise_icon.png" alt="sunrise_icon" class="icon-color">
+            <span>07:19</span>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="slideshow-container">
+        <div class="mySlides fade">
+          <div class="numbertext">27&deg;</div>
+          <div class="text"><img src="assets/images/icons/sunny_icon.png" class="icon-color" alt="sunny_icon">Sunny
+          </div>
+        </div>
+
+        <div class="mySlides fade">
+          <div class="numbertext">50&deg;</div>
+          <div class="text"><img src="assets/images/icons/rainy_icon.png" class="icon-color" alt="rainy_icon">Rainy
+          </div>
+        </div>
+
+        <div class="mySlides fade">
+          <div class="numbertext">70&deg;</div>
+          <div class="text"><img src="assets/images/icons/cloudy_icon.png" class="icon-color" alt="cloudy_icon">Cloudy
+          </div>
+        </div>
+        <a class="prev" style="left: 15%;" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+      </div>
+    </div>
+    <div class="col-md-7 pull-left chart-section">
+      <div class="col-md-12 pull-left">
+        <div class="welcome-txt pull-left">
+          <span><b>Welcome back Isabella!</b></span>
+          <span>Check out today's weather information</span>
+        </div>
+        <div class="profile pull-left">
+          <img class="pull-right" src="assets/images/ptofile.jpeg" alt="ptofile" height="10%" width="10%">
+          <span class="pull-right">...</span>
+        </div>
+      </div>
+      <div class="col-md-12 pull-left md-15 pd-15">
+        <div class="col-md-12 chart-heading">
+          <div class="hours-deatail"><b>Upcoming hours</b></div>
+          <div class="days-deatail">
+            <span>
+              <button><a href="index.html">Next days ></a> </button>
+            </span>
+            <span>
+              <select disabled>
+                <option>Rain precipitation</option>
+              </select>
+            </span>
+          </div>
+        </div>
+        <div id="container"></div>
+      </div>
+      <div class="col-md-12 pull-left weather">
+        <b>More details of today's weather</b>
+      </div>
+      <div class="col-md-4 pull-left">
+        <div class="card md-10">
+          <div class="card-header">
+            <b>Humidity</b>
+            <img class="card-image" src="assets/images/icons/waterdrop_icon.png" alt="waterdrop_icon">
+          </div>
+          <div class="card-body">
+            <b>82%</b>
+            <span>bad</span>
+          </div>
+          <div class="card-footer">
+            <div class="good">
+              <div>good</div>
+              <div class="progress">
+                <div class="progress-bar w-100"></div>
+              </div>
+            </div>
+            <div class="normal">
+              <div>normal</div>
+              <div class="progress">
+                <div class="progress-bar w-100"></div>
+              </div>
+            </div>
+            <div class="bad">
+              <div>bad</div>
+              <div class="progress">
+                <div class="progress-bar w-40"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 pull-left">
+        <div class="card md-10">
+          <div class="card-header pt-2">
+            <b>Wind</b>
+            <img class="card-image" src="assets/images/icons/air_icon.png" alt="air_icon">
+          </div>
+          <div class="card-body radius">
+            <div id='myChart'><a class="zc-ref" href="https://www.zingchart.com/">Charts by ZingChart</a></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 pull-left">
+        <div class="card md-10">
+          <div class="card-header">
+            <b>precipitation</b>
+            <img class="card-image" src="assets/images/icons/rainy_icon_bk1.png" alt="rainy_icon">
+          </div>
+          <div class="card-body">
+            <b>1.4</b>
+            <b>cm</b>
+          </div>
+          <div class="card-footer">
+            <div class="good w-12">
+              <div>0</div>
+              <div class="progress">
+                <div class="progress-bar w-100"></div>
+              </div>
+            </div>
+            <div class="normal w-12">
+              <div>20</div>
+              <div class="progress">
+                <div class="progress-bar w-100"></div>
+              </div>
+            </div>
+            <div class="bad w-12">
+              <div>30</div>
+              <div class="progress">
+                <div class="progress-bar w-40"></div>
+              </div>
+            </div>
+            <div class="bad w-12">
+              <div>40</div>
+              <div class="progress">
+                <div class="progress-bar w-0"></div>
+              </div>
+            </div>
+            <div class="bad w-12">
+              <div>50</div>
+              <div class="progress">
+                <div class="progress-bar w-0"></div>
+              </div>
+            </div>
+            <div class="bad w-12">
+              <div>60</div>
+              <div class="progress">
+                <div class="progress-bar w-0"></div>
+              </div>
+            </div>
+            <div class="bad w-12">
+              <div>70</div>
+              <div class="progress">
+                <div class="progress-bar w-0"></div>
+              </div>
+            </div>
+            <div class="bad w-12">
+              <div>80</div>
+              <div class="progress">
+                <div class="progress-bar w-0"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 pull-left">
+        <div class="card">
+          <div class="card-header">
+            <b>UV index</b>
+            <img class="card-image" src="assets/images/icons/sunny_icon.png" alt="Humidity_icon">
+          </div>
+          <div class="card-body">
+            <b>4</b>
+            <span>medium</span>
+          </div>
+          <div class="card-footer">
+            <div class="good w-20">
+              <div>0-2</div>
+              <div class="progress">
+                <div class="progress-bar w-100"></div>
+              </div>
+            </div>
+            <div class="normal w-20">
+              <div>3-5</div>
+              <div class="progress">
+                <div class="progress-bar w-100"></div>
+              </div>
+            </div>
+            <div class="bad w-20">
+              <div>6-7</div>
+              <div class="progress">
+                <div class="progress-bar w-40"></div>
+              </div>
+            </div>
+            <div class="bad w-20">
+              <div>8-10</div>
+              <div class="progress">
+                <div class="progress-bar w-0"></div>
+              </div>
+            </div>
+            <div class="bad w-20">
+              <div>11+</div>
+              <div class="progress">
+                <div class="progress-bar w-0"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 pull-left">
+        <div class="card">
+          <div class="card-header">
+            <b>Feels like</b>
+            <img class="card-image" src="assets/images/icons/thermostat_icon.png" alt="thermostat_icon">
+          </div>
+          <div class="card-body">
+            <b>30&deg;</b>
+          </div>
+          <div class="card-footer">
+            <div class="good w-100">
+              <div class="deg">0&deg;</div>
+              <div class="deg t-align-center">25&deg;</div>
+              <div class="deg t-align-end">50&deg;</div>
+              <div class="progress w-100">
+                <div class="progress-bar w-75"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 pull-left">
+        <div class="card">
+          <div class="card-header">
+            <b>Chance of rain</b>
+            <img class="card-image" src="assets/images/icons/umberla_icon.png" alt="umberla_icon">
+          </div>
+          <div class="card-body">
+            <b>80%</b>
+          </div>
+          <div class="card-footer">
+            <div class="good w-100">
+              <div class="deg w-18">0&deg;</div>
+              <div class="deg w-18 t-align-center">25&deg;</div>
+              <div class="deg w-18 t-align-center">50&deg;</div>
+              <div class="deg w-18 t-align-center">75&deg;</div>
+              <div class="deg w-18 t-align-end">100&deg;</div>
+              <div class="progress w-100">
+                <div class="progress-bar w-75"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+  <script>
+    let slideIndex = 1;
+    showSlides(slideIndex);
+    function plusSlides(n) {
+      showSlides(slideIndex += n);
+    }
+    function currentSlide(n) {
+      showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+      let i;
+      let slides = document.getElementsByClassName("mySlides");
+      let dots = document.getElementsByClassName("dot");
+      if (n > slides.length) { slideIndex = 1 }
+      if (n < 1) { slideIndex = slides.length }
+      for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+      }
+      for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+      }
+      slides[slideIndex - 1].style.display = "block";
+      dots[slideIndex - 1].className += " active";
+    };
+  </script>
+  <script>
+    window.feed = function (callback) {
+      var tick = {};
+      tick.plot0 = Math.ceil(350 + (Math.random() * 500));
+      callback(JSON.stringify(tick));
+    };
+
+    var myConfig = {
+      type: "gauge",
+      globals: {
+        fontSize: 10
+      },
+      plotarea: {
+        marginTop: 5
+      },
+      plot: {
+        size: '100%',
+        valueBox: {
+          placement: 'center',
+          text: '%v', //default
+          fontSize: 15,
+          rules: [{
+            rule: '%v >= 700',
+            text: '%v<br>EXCELLENT'
+          },
+          {
+            rule: '%v < 700 && %v > 640',
+            text: '%v<br>Good'
+          },
+          {
+            rule: '%v < 640 && %v > 580',
+            text: '%v<br>Fair'
+          },
+          {
+            rule: '%v <  580',
+            text: '%v<br>Bad'
+          }
+          ]
+        }
+      },
+      tooltip: {
+        borderRadius: 5
+      },
+      scaleR: {
+        aperture: 180,
+        minValue: 300,
+        maxValue: 850,
+        step: 50,
+        center: {
+          visible: false
+        },
+        tick: {
+          visible: false
+        },
+        item: {
+          offsetR: 0,
+          rules: [{
+            rule: '%i == 9',
+            offsetX: 15
+          }]
+        },
+        labels: ['300', '', '', '', '', '', '580', '640', '700', '750', '', '850'],
+        ring: {
+          size: 50,
+          rules: [{
+            rule: '%v <= 580',
+            backgroundColor: '#E53935'
+          },
+          {
+            rule: '%v > 580 && %v < 640',
+            backgroundColor: '#EF5350'
+          },
+          {
+            rule: '%v >= 640 && %v < 700',
+            backgroundColor: '#FFA726'
+          },
+          {
+            rule: '%v >= 700',
+            backgroundColor: '#29B6F6'
+          }
+          ]
+        }
+      },
+      refresh: {
+        type: "feed",
+        transport: "js",
+        url: "feed()",
+        interval: 1500,
+        resetTimeout: 1000
+      },
+      series: [{
+        values: [755], // starting value
+        backgroundColor: 'black',
+        indicator: [10, 10, 10, 10, 0.75],
+        animation: {
+          effect: 2,
+          method: 1,
+          sequence: 4,
+          speed: 900
+        },
+      }]
+    };
+
+    zingchart.render({
+      id: 'myChart',
+      data: myConfig,
+      height: 77,
+      width: '100%'
+    });
+  </script>
+</body>
+
+</html>
